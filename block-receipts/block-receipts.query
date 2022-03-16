@@ -1,0 +1,3 @@
+{
+    "query": "query{blocks (from: 13940300, to: 13940325) { hash number transactions { hash, from { address }, to { address }, status, gasUsed, logs { index, account {address }, topics, data } } }}"
+}

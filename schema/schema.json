@@ -1,0 +1,1775 @@
+{
+  "__schema": {
+    "queryType": {
+      "name": "Query"
+    },
+    "mutationType": {
+      "name": "Mutation"
+    },
+    "types": [
+      {
+        "kind": "OBJECT",
+        "name": "AccessTuple",
+        "description": "EIP-2718 ",
+        "fields": [
+          {
+            "name": "address",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Address",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "storageKeys",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Bytes32",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Account",
+        "description": "Account is an Ethereum account at a particular block.",
+        "fields": [
+          {
+            "name": "address",
+            "description": "Address is the address owning the account.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Address",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "balance",
+            "description": "Balance is the balance of the account, in wei.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "transactionCount",
+            "description": "TransactionCount is the number of transactions sent from this account,\nor in the case of a contract, the number of contracts created. Otherwise\nknown as the nonce.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "code",
+            "description": "Code contains the smart contract code for this account, if the account\nis a (non-self-destructed) contract.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "storage",
+            "description": "Storage provides access to the storage of a contract account, indexed\nby its 32 byte slot identifier.",
+            "args": [
+              {
+                "name": "slot",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Bytes32",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Address",
+        "description": "Address is a 20 byte Ethereum address, represented as 0x-prefixed hexadecimal.",
+        "fields": null,
+        "inputFields": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "BigInt",
+        "description": "BigInt is a large integer. Input is accepted as either a JSON number or as a string.\nStrings may be either decimal or 0x-prefixed hexadecimal. Output values are all\n0x-prefixed hexadecimal.",
+        "fields": null,
+        "inputFields": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Block",
+        "description": "Block is an Ethereum block.",
+        "fields": [
+          {
+            "name": "number",
+            "description": "Number is the number of this block, starting at 0 for the genesis block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "hash",
+            "description": "Hash is the block hash of this block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "parent",
+            "description": "Parent is the parent block of this block.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Block",
+              "ofType": null
+            }
+          },
+          {
+            "name": "nonce",
+            "description": "Nonce is the block nonce, an 8 byte sequence determined by the miner.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "transactionsRoot",
+            "description": "TransactionsRoot is the keccak256 hash of the root of the trie of transactions in this block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "transactionCount",
+            "description": "TransactionCount is the number of transactions in this block. if\ntransactions are not available for this block, this field will be null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            }
+          },
+          {
+            "name": "stateRoot",
+            "description": "StateRoot is the keccak256 hash of the state trie after this block was processed.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "receiptsRoot",
+            "description": "ReceiptsRoot is the keccak256 hash of the trie of transaction receipts in this block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "miner",
+            "description": "Miner is the account that mined this block.",
+            "args": [
+              {
+                "name": "block",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Account",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "extraData",
+            "description": "ExtraData is an arbitrary data field supplied by the miner.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "gasLimit",
+            "description": "GasLimit is the maximum amount of gas that was available to transactions in this block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "gasUsed",
+            "description": "GasUsed is the amount of gas that was used executing transactions in this block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "baseFeePerGas",
+            "description": "BaseFeePerGas is the fee perunit of gas burned by the protocol in this block.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            }
+          },
+          {
+            "name": "timestamp",
+            "description": "Timestamp is the unix timestamp at which this block was mined.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "logsBloom",
+            "description": "LogsBloom is a bloom filter that can be used to check if a block may\ncontain log entries matching a filter.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "mixHash",
+            "description": "MixHash is the hash that was used as an input to the PoW process.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "difficulty",
+            "description": "Difficulty is a measure of the difficulty of mining this block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "totalDifficulty",
+            "description": "TotalDifficulty is the sum of all difficulty values up to and including\nthis block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "ommerCount",
+            "description": "OmmerCount is the number of ommers (AKA uncles) associated with this\nblock. If ommers are unavailable, this field will be null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            }
+          },
+          {
+            "name": "ommers",
+            "description": "Ommers is a list of ommer (AKA uncle) blocks associated with this block.\nIf ommers are unavailable, this field will be null. Depending on your\nnode, the transactions, transactionAt, transactionCount, ommers,\nommerCount and ommerAt fields may not be available on any ommer blocks.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Block",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "ommerAt",
+            "description": "OmmerAt returns the ommer (AKA uncle) at the specified index. If ommers\nare unavailable, or the index is out of bounds, this field will be null.",
+            "args": [
+              {
+                "name": "index",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Block",
+              "ofType": null
+            }
+          },
+          {
+            "name": "ommerHash",
+            "description": "OmmerHash is the keccak256 hash of all the ommers (AKA uncles)\nassociated with this block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "transactions",
+            "description": "Transactions is a list of transactions associated with this block. If\ntransactions are unavailable for this block, this field will be null.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Transaction",
+                  "ofType": null
+                }
+              }
+            }
+          },
+          {
+            "name": "transactionAt",
+            "description": "TransactionAt returns the transaction at the specified index. If\ntransactions are unavailable for this block, or if the index is out of\nbounds, this field will be null.",
+            "args": [
+              {
+                "name": "index",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Transaction",
+              "ofType": null
+            }
+          },
+          {
+            "name": "logs",
+            "description": "Logs returns a filtered set of logs from this block.",
+            "args": [
+              {
+                "name": "filter",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "BlockFilterCriteria",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Log",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "account",
+            "description": "Account fetches an Ethereum account at the current block's state.",
+            "args": [
+              {
+                "name": "address",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Address",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Account",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "call",
+            "description": "Call executes a local call operation at the current block's state.",
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CallData",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CallResult",
+              "ofType": null
+            }
+          },
+          {
+            "name": "estimateGas",
+            "description": "EstimateGas estimates the amount of gas that will be required for\nsuccessful execution of a transaction at the current block's state.",
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CallData",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "BlockFilterCriteria",
+        "description": "BlockFilterCriteria encapsulates log filter criteria for a filter applied\nto a single block.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "addresses",
+            "description": "Addresses is list of addresses that are of interest. If this list is\nempty, results will not be filtered by address.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Address",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "topics",
+            "description": "Topics list restricts matches to particular event topics. Each event has a list\nof topics. Topics matches a prefix of that list. An empty element array matches any\ntopic. Non-empty elements represent an alternative that matches any of the\ncontained topics.\n\nExamples:\n - [] or nil          matches any topic list\n - [[A]]              matches topic A in first position\n - [[], [B]]          matches any topic in first position, B in second position\n - [[A], [B]]         matches topic A in first position, B in second position\n - [[A, B]], [C, D]]  matches topic (A OR B) in first position, (C OR D) in second position",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Bytes32",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ]
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Bytes",
+        "description": "Bytes is an arbitrary length binary string, represented as 0x-prefixed hexadecimal.\nAn empty byte string is represented as '0x'. Byte strings must have an even number of hexadecimal nybbles.",
+        "fields": null,
+        "inputFields": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Bytes32",
+        "description": "Bytes32 is a 32 byte binary string, represented as 0x-prefixed hexadecimal.",
+        "fields": null,
+        "inputFields": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CallData",
+        "description": "CallData represents the data associated with a local contract call.\nAll fields are optional.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "from",
+            "description": "From is the address making the call.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Address",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "to",
+            "description": "To is the address the call is sent to.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Address",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gas",
+            "description": "Gas is the amount of gas sent with the call.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gasPrice",
+            "description": "GasPrice is the price, in wei, offered for each unit of gas.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "maxFeePerGas",
+            "description": "MaxFeePerGas is the maximum fee per gas offered, in wei. ",
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "maxPriorityFeePerGas",
+            "description": "MaxPriorityFeePerGas is the maximum miner tip per gas offered, in wei. ",
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "value",
+            "description": "Value is the value, in wei, sent along with the call.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "data",
+            "description": "Data is the data sent to the callee.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Bytes",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CallResult",
+        "description": "CallResult is the result of a local call operation.",
+        "fields": [
+          {
+            "name": "data",
+            "description": "Data is the return data of the called contract.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "gasUsed",
+            "description": "GasUsed is the amount of gas used by the call, after any refunds.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "status",
+            "description": "Status is the result of the call - 1 for success or 0 for failure.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "FilterCriteria",
+        "description": "FilterCriteria encapsulates log filter criteria for searching log entries.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "fromBlock",
+            "description": "FromBlock is the block at which to start searching, inclusive. Defaults\nto the latest block if not supplied.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "toBlock",
+            "description": "ToBlock is the block at which to stop searching, inclusive. Defaults\nto the latest block if not supplied.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "addresses",
+            "description": "Addresses is a list of addresses that are of interest. If this list is\nempty, results will not be filtered by address.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Address",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "topics",
+            "description": "Topics list restricts matches to particular event topics. Each event has a list\nof topics. Topics matches a prefix of that list. An empty element array matches any\ntopic. Non-empty elements represent an alternative that matches any of the\ncontained topics.\n\nExamples:\n - [] or nil          matches any topic list\n - [[A]]              matches topic A in first position\n - [[], [B]]          matches any topic in first position, B in second position\n - [[A], [B]]         matches topic A in first position, B in second position\n - [[A, B]], [C, D]]  matches topic (A OR B) in first position, (C OR D) in second position",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Bytes32",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Log",
+        "description": "Log is an Ethereum event log.",
+        "fields": [
+          {
+            "name": "index",
+            "description": "Index is the index of this log in the block.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "account",
+            "description": "Account is the account which generated this log - this will always\nbe a contract account.",
+            "args": [
+              {
+                "name": "block",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Account",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "topics",
+            "description": "Topics is a list of 0-4 indexed topics for the log.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Bytes32",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "data",
+            "description": "Data is unindexed data for this log.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "transaction",
+            "description": "Transaction is the transaction that generated this log entry.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Transaction",
+                "ofType": null
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Long",
+        "description": "Long is a 64 bit unsigned integer.",
+        "fields": null,
+        "inputFields": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Mutation",
+        "description": null,
+        "fields": [
+          {
+            "name": "sendRawTransaction",
+            "description": "SendRawTransaction sends an RLP-encoded transaction to the network.",
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Bytes",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Pending",
+        "description": "Pending represents the current pending state.",
+        "fields": [
+          {
+            "name": "transactionCount",
+            "description": "TransactionCount is the number of transactions in the pending state.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "transactions",
+            "description": "Transactions is a list of transactions in the current pending state.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Transaction",
+                  "ofType": null
+                }
+              }
+            }
+          },
+          {
+            "name": "account",
+            "description": "Account fetches an Ethereum account for the pending state.",
+            "args": [
+              {
+                "name": "address",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Address",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Account",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "call",
+            "description": "Call executes a local call operation for the pending state.",
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CallData",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CallResult",
+              "ofType": null
+            }
+          },
+          {
+            "name": "estimateGas",
+            "description": "EstimateGas estimates the amount of gas that will be required for\nsuccessful execution of a transaction for the pending state.",
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CallData",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Query",
+        "description": null,
+        "fields": [
+          {
+            "name": "block",
+            "description": "Block fetches an Ethereum block by number or by hash. If neither is\nsupplied, the most recent known block is returned.",
+            "args": [
+              {
+                "name": "number",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "hash",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Bytes32",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Block",
+              "ofType": null
+            }
+          },
+          {
+            "name": "blocks",
+            "description": "Blocks returns all the blocks between two numbers, inclusive. If\nto is not supplied, it defaults to the most recent known block.",
+            "args": [
+              {
+                "name": "from",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "to",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Block",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "pending",
+            "description": "Pending returns the current pending state.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Pending",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "transaction",
+            "description": "Transaction returns a transaction specified by its hash.",
+            "args": [
+              {
+                "name": "hash",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Bytes32",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Transaction",
+              "ofType": null
+            }
+          },
+          {
+            "name": "logs",
+            "description": "Logs returns log entries matching the provided filter.",
+            "args": [
+              {
+                "name": "filter",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "FilterCriteria",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Log",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "gasPrice",
+            "description": "GasPrice returns the node's estimate of a gas price sufficient to\nensure a transaction is mined in a timely fashion.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "maxPriorityFeePerGas",
+            "description": "MaxPriorityFeePerGas returns the node's estimate of a gas tip sufficient\nto ensure a transaction is mined in a timely fashion.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "syncing",
+            "description": "Syncing returns information on the current synchronisation state.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "SyncState",
+              "ofType": null
+            }
+          },
+          {
+            "name": "chainID",
+            "description": "ChainID returns the current chain ID for transaction replay protection.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SyncState",
+        "description": "SyncState contains the current synchronisation state of the client.",
+        "fields": [
+          {
+            "name": "startingBlock",
+            "description": "StartingBlock is the block number at which synchronisation started.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "currentBlock",
+            "description": "CurrentBlock is the point at which synchronisation has presently reached.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "highestBlock",
+            "description": "HighestBlock is the latest known block number.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Transaction",
+        "description": "Transaction is an Ethereum transaction.",
+        "fields": [
+          {
+            "name": "hash",
+            "description": "Hash is the hash of this transaction.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes32",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "nonce",
+            "description": "Nonce is the nonce of the account this transaction was generated with.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "index",
+            "description": "Index is the index of this transaction in the parent block. This will\nbe null if the transaction has not yet been mined.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            }
+          },
+          {
+            "name": "from",
+            "description": "From is the account that sent this transaction - this will always be\nan externally owned account.",
+            "args": [
+              {
+                "name": "block",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Account",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "to",
+            "description": "To is the account the transaction was sent to. This is null for\ncontract-creating transactions.",
+            "args": [
+              {
+                "name": "block",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Account",
+              "ofType": null
+            }
+          },
+          {
+            "name": "value",
+            "description": "Value is the value, in wei, sent along with this transaction.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "gasPrice",
+            "description": "GasPrice is the price offered to miners for gas, in wei per unit.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "maxFeePerGas",
+            "description": "MaxFeePerGas is the maximum fee per gas offered to include a transaction, in wei. ",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            }
+          },
+          {
+            "name": "maxPriorityFeePerGas",
+            "description": "MaxPriorityFeePerGas is the maximum miner tip per gas offered to include a transaction, in wei. ",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            }
+          },
+          {
+            "name": "gas",
+            "description": "Gas is the maximum amount of gas this transaction can consume.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Long",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "inputData",
+            "description": "InputData is the data supplied to the target of the transaction.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Bytes",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "block",
+            "description": "Block is the block this transaction was mined in. This will be null if\nthe transaction has not yet been mined.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Block",
+              "ofType": null
+            }
+          },
+          {
+            "name": "status",
+            "description": "Status is the return status of the transaction. This will be 1 if the\ntransaction succeeded, or 0 if it failed (due to a revert, or due to\nrunning out of gas). If the transaction has not yet been mined, this\nfield will be null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            }
+          },
+          {
+            "name": "gasUsed",
+            "description": "GasUsed is the amount of gas that was used processing this transaction.\nIf the transaction has not yet been mined, this field will be null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            }
+          },
+          {
+            "name": "cumulativeGasUsed",
+            "description": "CumulativeGasUsed is the total gas used in the block up to and including\nthis transaction. If the transaction has not yet been mined, this field\nwill be null.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Long",
+              "ofType": null
+            }
+          },
+          {
+            "name": "effectiveGasPrice",
+            "description": "EffectiveGasPrice is actual value per gas deducted from the sender's\naccount. Before EIP-1559, this is equal to the transaction's gas price.\nAfter EIP-1559, it is baseFeePerGas + min(maxFeePerGas - baseFeePerGas,\nmaxPriorityFeePerGas). Legacy transactions and EIP-2930 transactions are\ncoerced into the EIP-1559 format by setting both maxFeePerGas and\nmaxPriorityFeePerGas as the transaction's gas price.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigInt",
+              "ofType": null
+            }
+          },
+          {
+            "name": "createdContract",
+            "description": "CreatedContract is the account that was created by a contract creation\ntransaction. If the transaction was not a contract creation transaction,\nor it has not yet been mined, this field will be null.",
+            "args": [
+              {
+                "name": "block",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Long",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Account",
+              "ofType": null
+            }
+          },
+          {
+            "name": "logs",
+            "description": "Logs is a list of log entries emitted by this transaction. If the\ntransaction has not yet been mined, this field will be null.",
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Log",
+                  "ofType": null
+                }
+              }
+            }
+          },
+          {
+            "name": "r",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "s",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "v",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "type",
+            "description": "Envelope transaction support",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            }
+          },
+          {
+            "name": "accessList",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "AccessTuple",
+                  "ofType": null
+                }
+              }
+            }
+          }
+        ],
+        "inputFields": null
+      }
+    ]
+  }
+}
